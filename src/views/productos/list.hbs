@@ -1,0 +1,75 @@
+<div class="container" style="margin-top:70px;">
+    <div class="row mt-5">
+        <h3 class="text-center text-uppercase p-2">Lista de Productos</h3>
+
+        <div style="padding: 10px;">
+            <button class="btn btn-danger"><a class="nav-link link-light" aria-current="page" href="/addprod"> Nuevo Producto</a></button>
+        </div>
+
+        {{#if productos}}
+        <table class="table text-center">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col">ID Producto</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each productos}}
+                <tr>
+                    <td>{{idprod}}</td>
+                    <td>{{nombre}}</td>
+                    <td>{{precio}}</td>
+                    <td>{{cantidad}}</td>
+                    <td>
+                        <div class="">
+                            <a href="/editprod/{{idprod}}" class="btn btn-warning p-2">
+                                <i class="fa-solid fa-pencil"></i>Actualizar</a>
+                            <button type="button" class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#deleteModal{{idprod}}">
+                                <i class="fa-solid fa-trash"></i>Eliminar</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="deleteModal{{idprod}}" tabindex="-1" aria-labelledby="deleteModalLabel{{idprod}}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel{{idprod}}">Eliminar Producto</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estás seguro de que quieres eliminar este producto?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <a href="/deleteprod/{{idprod}}" class="btn btn-danger">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+            <tfoot>
+                <tr class="table-dark">
+                    <td colspan="5">REGISTRO DE PRODUCTOS</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {{else}}
+    <div class="card text-center mx-auto" style="width: 350px;">
+        <div class="card-header">
+            <h3>No hay productos registrados</h3>
+        </div>
+        <div class="card-body">
+            <p>No se encontraron productos en la base de datos.</p>
+            <a href="/addprod" class="btn btn-primary">Agregar Producto</a>
+        </div>
+    </div>
+    {{/if}}
+</div>
